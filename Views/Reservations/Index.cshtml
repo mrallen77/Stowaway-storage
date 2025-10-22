@@ -1,0 +1,41 @@
+﻿@model IEnumerable<StowawayStorage.Models.Reservation>
+@{
+    ViewData["Title"] = "All Reservations";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Unit</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>User Id</th>
+            <th>Notes</th>
+            <th class="text-end"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Unit?.Name (@r.Unit?.Size)</td>
+                <td>@r.StartDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                <td>@r.EndDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                <td>@r.UserId</td>
+                <td>@r.Notes</td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@r.Id" class="btn btn-sm btn-outline-secondary me-2">Details</a>
+                    <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@r.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No reservations found.</div>
+}

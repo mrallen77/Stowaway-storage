@@ -1,0 +1,70 @@
+﻿@model StowawayStorage.Controllers.ReservationsController.ReservationEditVm
+@{
+    ViewData["Title"] = "Edit Reservation";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post" class="row g-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="col-md-6">
+        <label asp-for="UnitId" class="form-label">Unit</label>
+        <select asp-for="UnitId" class="form-select" asp-items="ViewBag.UnitId">
+            <option value="">-- Select a unit --</option>
+        </select>
+        <span asp-validation-for="UnitId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="StartLocal" class="form-label"></label>
+        <input asp-for="StartLocal" class="form-control" type="date" id="startDate" />
+        <span asp-validation-for="StartLocal" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-3">
+        <label asp-for="EndLocal" class="form-label"></label>
+        <input asp-for="EndLocal" class="form-control" type="date" id="endDate" />
+        <span asp-validation-for="EndLocal" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary">Save changes</button>
+        <a asp-action="My" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Keep date rules consistent with Create view
+        const toIso = d => {
+            const tzOffset = d.getTimezoneOffset();
+            const local = new Date(d.getTime() - tzOffset * 60000);
+            return local.toISOString().split('T')[0];
+        };
+        const start = document.getElementById('startDate');
+        const end = document.getElementById('endDate');
+
+        function syncEndMin() {
+            const today = new Date(); today.setHours(0, 0, 0, 0);
+            start.min = toIso(today);
+            const s = start.value ? new Date(start.value + "T00:00:00") : today;
+            const minEnd = new Date(s); minEnd.setDate(minEnd.getDate() + 1);
+            end.min = toIso(minEnd);
+            if (end.value) {
+                const e = new Date(end.value + "T00:00:00");
+                if (e <= s) end.value = toIso(minEnd);
+            }
+        }
+        start.addEventListener('change', syncEndMin);
+        syncEndMin();
+    </script>
+}

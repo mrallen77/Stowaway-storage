@@ -1,0 +1,43 @@
+﻿@model IEnumerable<StowawayStorage.Models.Reservation>
+@{
+    ViewData["Title"] = "My Reservations";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Flash"] is string msg)
+{
+    <div class="alert alert-success">@msg</div>
+}
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Unit</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Unit?.Name (@r.Unit?.Size)</td>
+                <td>@r.StartDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                <td>@r.EndDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                <td>@r.Notes</td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@r.Id" class="btn btn-sm btn-outline-danger">Cancel</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No reservations yet. <a asp-controller="StorageUnits" asp-action="Index">Browse units</a>.</div>
+}

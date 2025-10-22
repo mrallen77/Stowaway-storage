@@ -1,0 +1,26 @@
+﻿@model StowawayStorage.Models.StorageUnit
+@{
+    ViewData["Title"] = "Unit Details";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Size</dt>
+            <dd class="col-sm-9">@Model.Size</dd>
+
+            <dt class="col-sm-3">Monthly Price</dt>
+            <dd class="col-sm-9">$@Model.MonthlyPrice.ToString("n2")</dd>
+
+            <dt class="col-sm-3">Active</dt>
+            <dd class="col-sm-9">@Model.IsActive</dd>
+        </dl>
+    </div>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+<a asp-action="Index" class="btn btn-outline-secondary">Back</a>

@@ -1,0 +1,30 @@
+﻿@model StowawayStorage.Models.Reservation
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Unit</dt>
+            <dd class="col-sm-9">@Model.Unit?.Name (@Model.Unit?.Size)</dd>
+
+            <dt class="col-sm-3">Start</dt>
+            <dd class="col-sm-9">@Model.StartDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">End</dt>
+            <dd class="col-sm-9">@Model.EndDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">Notes</dt>
+            <dd class="col-sm-9">@Model.Notes</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Cancel</a>
+    <a asp-action="My" class="btn btn-outline-secondary">Back</a>
+</div>

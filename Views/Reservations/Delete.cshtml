@@ -1,0 +1,34 @@
+﻿@model StowawayStorage.Models.Reservation
+@{
+    ViewData["Title"] = "Cancel Reservation";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <strong>Heads up:</strong> This will cancel your reservation.
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Unit</dt>
+            <dd class="col-sm-9">@Model.Unit?.Name (@Model.Unit?.Size)</dd>
+
+            <dt class="col-sm-3">Start</dt>
+            <dd class="col-sm-9">@Model.StartDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">End</dt>
+            <dd class="col-sm-9">@Model.EndDateUtc.ToLocalTime().ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">Notes</dt>
+            <dd class="col-sm-9">@Model.Notes</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Yes, cancel it</button>
+    <a asp-action="My" class="btn btn-outline-secondary">No, go back</a>
+</form>

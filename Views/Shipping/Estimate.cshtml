@@ -1,0 +1,53 @@
+﻿@model StowawayStorage.Models.ShippingEstimate
+@{
+    ViewData["Title"] = "Shipping Estimator";
+}
+
+<h1>Shipping Estimator</h1>
+
+<form asp-action="Estimate" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="WeightLbs" class="form-label">Weight (lbs)</label>
+        <input asp-for="WeightLbs" class="form-control" />
+        <span asp-validation-for="WeightLbs" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LengthInches" class="form-label">Length (inches)</label>
+        <input asp-for="LengthInches" class="form-control" />
+        <span asp-validation-for="LengthInches" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="WidthInches" class="form-label">Width (inches)</label>
+        <input asp-for="WidthInches" class="form-control" />
+        <span asp-validation-for="WidthInches" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HeightInches" class="form-label">Height (inches)</label>
+        <input asp-for="HeightInches" class="form-control" />
+        <span asp-validation-for="HeightInches" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DestinationZip" class="form-label">Destination ZIP</label>
+        <input asp-for="DestinationZip" class="form-control" />
+        <span asp-validation-for="DestinationZip" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Calculate</button>
+</form>
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-success mt-4">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

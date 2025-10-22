@@ -1,0 +1,37 @@
+﻿@model IEnumerable<StowawayStorage.Models.StorageUnit>
+@{
+    ViewData["Title"] = "Units";
+}
+
+<h2>Available Units</h2>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Monthly Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Name</td>
+                <td>@u.Size</td>
+                <td>$@u.MonthlyPrice.ToString("n2")</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Reservations" asp-action="Create" asp-route-unitId="@u.Id">
+                        Book
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No active units yet. (Admin can create some.)</div>
+}

@@ -1,0 +1,35 @@
+﻿@model StowawayStorage.Models.StorageUnit
+@{
+    ViewData["Title"] = "Delete Unit";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <strong>Heads up:</strong> This will permanently remove the unit.
+    Any related reservations will also be removed if your FK is set to cascade.
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Size</dt>
+            <dd class="col-sm-9">@Model.Size</dd>
+
+            <dt class="col-sm-3">Monthly Price</dt>
+            <dd class="col-sm-9">$@Model.MonthlyPrice.ToString("n2")</dd>
+
+            <dt class="col-sm-3">Active</dt>
+            <dd class="col-sm-9">@Model.IsActive</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Yes, delete it</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>

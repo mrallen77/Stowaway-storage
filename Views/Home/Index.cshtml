@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container py-5">
+        <h1 class="display-5 fw-bold">StowawayStorage</h1>
+        <p class="col-md-8 fs-5">
+            Clean, secure self-storage with climate options and flexible month-to-month plans.
+        </p>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary btn-lg" asp-controller="StorageUnits" asp-action="Index">Find a Unit</a>
+            <a class="btn btn-outline-secondary btn-lg" asp-controller="Reservations" asp-action="Index">View Reservations</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Climate Controlled</h5>
+                    <p class="card-text">Keep sensitive items safe with temperature-regulated units.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Transparent Pricing</h5>
+                    <p class="card-text">Flat monthly rates, no surprises. Cancel anytime.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Secure Access</h5>
+                    <p class="card-text">Modern facilities with monitored access and lighting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
